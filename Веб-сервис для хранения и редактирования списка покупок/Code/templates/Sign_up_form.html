@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+</head>
+<style>
+  html {
+    font-family: Times New Roman;
+    display: inline-block;
+    text-align: left;
+  }
+
+  h2 {
+    font-size: 2.0rem;
+    color: #ccc;
+    padding: 0em 0em 0em;
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+    color: #ccc;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: center;
+    margin-top: 10;
+  }
+
+  p {
+    font-size: 1.6rem;
+    color: #ccc;
+    padding: 0em 0em 0em;
+    text-align: center;
+  }
+
+  body {
+    background: #000000;
+    max-width: 600px;
+    margin: 0px auto;
+    padding-bottom: 25px;
+  }
+
+  .button3 {
+    display: inline-block;
+    background-color: #008CBA;
+    border: none;
+    border-radius: 4px;
+    color: #ccc;
+    padding: 5px 20px;
+    margin: 6px;
+    text-decoration: none;
+    font-size: 25px;
+  }
+</style>
+
+<body>
+
+  {% if message %}
+  <h1>{{ message }}</h1>
+  {% endif %}
+
+  <form action="" method="post">
+    <h1>
+      <input type="text" name="username" placeholder="Username" value="" required minlength="4" maxlength="16"
+        style="border: none; font-size:18pt; height:30px; width:300px; border-radius: 4px">
+    </h1>
+    <h1>
+      <input type="password" name="password" placeholder="Password" value="" required minlength="4" maxlength="16"
+        style="border: none; font-size:18pt; height:30px; width:300px; border-radius: 4px">
+    </h1>
+
+    <h1>
+      <input type="password" name="conf_pas" placeholder="Password again" value="" required minlength="4" maxlength="16"
+        style="border: none; font-size:18pt; height:30px; width:300px; border-radius: 4px">
+    </h1>
+    <h1><input type="submit" value="Register" class=button3></h1>
+  </form>
+
+</body>
+
+</html>

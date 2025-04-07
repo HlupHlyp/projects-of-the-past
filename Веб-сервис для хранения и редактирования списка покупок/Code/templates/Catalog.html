@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Login</title>
+</head>
+<style>
+	html {
+		font-family: Times New Roman;
+		display: inline-block;
+		text-align: left;
+	}
+
+	h2 {
+		font-size: 2.0rem;
+		color: #ccc;
+		padding: 0em 0em 0em;
+		text-align: center;
+	}
+
+	h1 {
+		font-size: 1.6rem;
+		color: #ccc;
+		padding-left: 10px;
+		padding-right: 10px;
+		text-align: center;
+		margin-top: 10;
+	}
+
+	p {
+		font-size: 1.6rem;
+		color: #ccc;
+		padding: 0em 0em 0em;
+		text-align: center;
+	}
+
+	body {
+		background: #000000;
+		max-width: 600px;
+		margin: 0px auto;
+		padding-bottom: 25px;
+	}
+
+	.button3 {
+		display: inline-block;
+		background-color: #008CBA;
+		border: none;
+		border-radius: 4px;
+		color: #ccc;
+		padding-top: 6px;
+		margin: 6px;
+		text-decoration: none;
+		font-size: 25px;
+	}
+
+	.button4 {
+		display: inline-block;
+		background-color: #008CBA;
+		border: none;
+		border-radius: 4px;
+		color: #ccc;
+		padding: 5px 20px;
+		margin: 6px;
+		text-decoration: none;
+		font-size: 25px;
+	}
+</style>
+
+<body>
+	<h2>Catalog</h2>
+	<h1><button class="button3" onclick="ButtonStyle(this)" id="banana"><img
+				src="{{ url_for('static', filename='banana.jpg') }}" /></button>
+		<button class="button3" onclick="ButtonStyle(this)" id="apple"><img
+				src="{{ url_for('static', filename='apple.jpg') }}" /></button>
+		<button class="button3" onclick="ButtonStyle(this)" id="carrot"><img
+				src="{{ url_for('static', filename='carrot.jpg') }}" /></button>
+		<button class="button3" onclick="ButtonStyle(this)" id="blueberry"><img
+				src="{{ url_for('static', filename='blueberry.jpg') }}" /></button>
+		<button class="button3" onclick="ButtonStyle(this)" id="orange"><img
+				src="{{ url_for('static', filename='orange.jpg') }}" /></button>
+	</h1>
+	<h1><a href='/shopping_cart'><button class="button4" id="banana">To shopping cart</button></a></h1>
+	<h1><a href='/exit'><button class="button4" id="banana" style="background-color: grey;">Exit</button></a></h1>
+</body>
+<script>
+	function ButtonStyle(_this) {
+		const item = {
+			"item": _this.id,
+		};
+		const Http = new XMLHttpRequest();
+		var url = ''
+
+		if (_this.style.backgroundColor == "red") {
+			_this.style.backgroundColor = "#008CBA";
+			url = '/del_item';
+		}
+		else {
+			_this.style.backgroundColor = "red";
+			url = '/add_item';
+		}
+
+		Http.open("POST", url);
+		Http.setRequestHeader("Content-Type", "application/json");
+		Http.send(JSON.stringify(item));
+	}
+
+</script>
+
+</html>

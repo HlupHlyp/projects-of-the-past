@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Login</title>
+</head>
+<style>
+	html {
+		font-family: Times New Roman;
+		display: inline-block;
+		text-align: left;
+	}
+
+	h2 {
+		font-size: 2.0rem;
+		color: #ccc;
+		padding: 0em 0em 0em;
+		text-align: center;
+	}
+
+	h1 {
+		font-size: 1.6rem;
+		color: #ccc;
+		padding-left: 10px;
+		padding-right: 10px;
+		text-align: center;
+		margin-top: 10;
+	}
+
+	p {
+		font-size: 1.6rem;
+		color: #ccc;
+		padding: 0em 0em 0em;
+		text-align: center;
+	}
+
+	body {
+		background: #000000;
+		max-width: 600px;
+		margin: 0px auto;
+		padding-bottom: 25px;
+	}
+
+	.button3 {
+		display: inline-block;
+		background-color: #008CBA;
+		border: none;
+		border-radius: 4px;
+		color: #ccc;
+		padding-top: 6px;
+		margin: 6px;
+		text-decoration: none;
+		font-size: 25px;
+	}
+
+	.button4 {
+		display: inline-block;
+		background-color: #008CBA;
+		border: none;
+		border-radius: 4px;
+		color: #ccc;
+		padding: 5px 20px;
+		margin: 6px;
+		text-decoration: none;
+		font-size: 25px;
+	}
+</style>
+
+<body>
+	{% if message %}
+	<h2>{{ message }}</h2>
+	{% endif %}
+
+	<h1><button class="button3" id="banana" onclick="Del_item(this)"><img
+				src="{{ url_for('static', filename='banana.jpg') }}" /></button>
+		<button class="button3" id="apple" onclick="Del_item(this)"><img
+				src="{{ url_for('static', filename='apple.jpg') }}" /></button>
+		<button class="button3" id="carrot" onclick="Del_item(this)"><img
+				src="{{ url_for('static', filename='carrot.jpg') }}" /></button>
+		<button class="button3" id="blueberry" onclick="Del_item(this)"><img
+				src="{{ url_for('static', filename='blueberry.jpg') }}" /></button>
+		<button class="button3" id="orange" onclick="Del_item(this)"><img
+				src="{{ url_for('static', filename='orange.jpg') }}" /></button>
+	</h1>
+	<h1><a href='/catalog'><button class="button4" id="banana">To catalog</button></a></h1>
+	<h1><a href='/exit'><button class="button4" id="banana" style="background-color: grey;">Exit</button></a></h1>
+
+</body>
+<script>
+	document.addEventListener("DOMContentLoaded", ButtonStyle);
+	function ButtonStyle(event) {
+		var req = new XMLHttpRequest();
+		req.open("GET", "/renew", false);
+		req.addEventListener("load", function () {
+			if (req.status < 400) {
+				var words = req.responseText.split(",");
+				words.forEach(element => {
+					var elem = document.getElementById(element);
+					elem.remove();
+				});
+			}
+		});
+		req.send(null);
+	}
+
+	function Del_item(_this) {
+		const item = {
+			"item": _this.id,
+		};
+		const Http = new XMLHttpRequest();
+		const url = '/del_item';
+		Http.open("POST", url);
+		Http.setRequestHeader("Content-Type", "application/json");
+		Http.send(JSON.stringify(item));
+		_this.remove()
+	}
+</script>
+
+</html>
